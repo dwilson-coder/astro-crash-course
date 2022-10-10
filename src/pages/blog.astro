@@ -1,0 +1,32 @@
+---
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro'; 
+import Footer from '../components/Footer.astro'
+import Card from '../components/Card.astro'
+import Showcase from '../components/Showcase.astro'
+import postcss from 'postcss';
+
+
+const posts = await Astro.glob('../posts/*.md')
+---
+
+
+
+
+<Layout title="Astro Blog">
+  <Showcase heading="Astro Blog" text="This blog was built using Astro"/>
+<section class="page-content">
+  <div class="container">
+
+    {posts.map(post =>(
+<Card>
+  <h3>{post.frontmatter.title}</h3>
+  <p>{post.frontmatter.excerpt}</p>
+  <a href={`/${post.frontmatter.slug}`} class="btn">Read More</a>
+  </Card>
+    ))}
+
+  </div>
+</section>
+<Footer />
+</Layout>
